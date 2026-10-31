@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ofrenda Digital - Ghost in the Machine</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0f281e;--card:#fdf6e3;--accent:#ff8c00;--text:#1a1a1a;--error:#d32f2f}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:#e8f0e8;font-family:'Inter',sans-serif;min-height:100vh}
+  h1,h2{font-family:'Crimson Pro',serif}
+  .container{max-width:1200px;margin:0 auto;padding:40px 20px}
+  .header{text-align:center;margin-bottom:40px}
+  .header h1{font-size:48px;color:var(--card);margin-bottom:12px}
+  .header p{color:#a8c4a0;max-width:600px;margin:0 auto;line-height:1.6}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  .form-card{background:var(--card);color:var(--text);border-radius:24px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+  .form-card h2{font-size:28px;margin-bottom:24px;color:#0f281e}
+  label{display:block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#6b7c6b;margin-bottom:8px;margin-top:16px;font-weight:500}
+  input,select,textarea{width:100%;padding:14px 16px;border:1.5px solid #e0d5c0;border-radius:12px;font-size:16px;font-family:inherit;background:white;transition:0.2s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  input.invalid,select.invalid,textarea.invalid{border-color:var(--error);background:#fff5f5}
+  textarea{min-height:100px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .error-msg{color:var(--error);font-size:12px;margin-top:6px;display:none;line-height:1.4}
+  .error-msg.show{display:block}
+  .btn{margin-top:24px;width:100%;padding:16px;background:#0f281e;color:#fdf6e3;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;transition:0.2s}
+  .btn:hover{background:#1a3d2e;transform:translateY(-1px)}
+  .btn:disabled{background:#999;cursor:not-allowed;transform:none}
+  .preview-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:32px;min-height:500px}
+  .preview-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;justify-content:space-between}
+  .empty{text-align:center;padding:60px 20px;color:#8aa88a}
+  .ofrenda-photo{width:160px;height:160px;border-radius:50%;object-fit:cover;border:4px solid var(--accent);margin:0 auto 20px;display:block;box-shadow:0 0 30px rgba(255,140,0,0.4)}
+  .ofrenda-name{font-family:'Crimson Pro',serif;font-size:32px;text-align:center;color:var(--card);margin-bottom:8px}
+  .ofrenda-meta{text-align:center;color:#a8c4a0;font-size:14px;margin-bottom:20px}
+  .ofrenda-text{background:rgba(253,246,227,0.08);padding:20px;border-radius:16px;line-height:1.7;color:#e8f0e8;margin-top:20px;white-space:pre-wrap}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+  .tag{background:rgba(255,140,0,0.2);color:#ffbb66;padding:6px 12px;border-radius:20px;font-size:12px}
+  .badge{margin-top:20px;text-align:center;font-size:12px;color:#6b9b6b;background:rgba(0,0,0,0.3);padding:10px;border-radius:20px}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#d32f2f;color:white;padding:14px 24px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.3);display:none;z-index:999;font-size:14px;max-width:90%}
+  .toast.show{display:block;animation:slideUp 0.3s}
+  @keyframes slideUp{from{transform:translate(-50%,100%);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Tak pernah padam.</h1>
+    <p>Bukan horor. Bukan menakutkan. Ini altar kecil di laptopmu — untuk Nenek, Kakek, Ibu, Ayah yang sudah berpulang. Offline, privat, bisa dibawa ke makam tanpa sinyal.</p>
+  </div>
+
+  <div class="grid">
+    <div class="form-card">
+      <h2>Siapa yang ingin kamu kenang?</h2>
+      
+      <label>Nama Almarhum *</label>
+      <input id="nama" placeholder="Contoh: Nenek Lia" value="">
+      <div id="err-nama" class="error-msg"></div>
+
+      <div class="row">
+        <div>
+          <label>Hubungan *</label>
+          <select id="hubungan">
+            <option value="" disabled selected>Pilih hubungan</option>
+            <option value="Nenek">Nenek</option>
+            <option value="Kakek">Kakek</option>
+            <option value="Ibu">Ibu</option>
+            <option value="Ayah">Ayah</option>
+            <option value="Sahabat">Sahabat</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+          <div id="err-hubungan" class="error-msg"></div>
+        </div>
+        <div>
+          <label>Upload Foto (Opsional, max 5MB)</label>
+          <input type="file" id="foto" accept="image/png,image/jpeg,image/jpg,image/webp">
+          <div id="err-foto" class="error-msg"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Makanan Favorit (opsional)</label>
+          <input id="makanan" placeholder="Rendang, klepon, kopi tubruk">
+        </div>
+        <div>
+          <label>Lagu Favorit (opsional)</label>
+          <input id="lagu" placeholder="Bengawan Solo, Bimbo, etc">
+        </div>
+      </div>
+
+      <label>Satu Kenangan Yang Paling Ingat *</label>
+      <textarea id="kenangan" placeholder="Ceritakan satu momen kecil... Misalnya: cara beliau mengaduk teh, atau tawa saat hujan pertama... Minimal 10 karakter."></textarea>
+      <div id="err-kenangan" class="error-msg"></div>
+      <div style="font-size:11px;color:#999;margin-top:4px;text-align:right"><span id="char-count">0</span>/200 karakter (min 10)</div>
+
+      <button class="btn" onclick="nyalakanKenangan()" id="btn-nyala">Nyalakan Kenangan 🕯️</button>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-label"><span>Ofrenda Preview</span><span style="color:#5aaf6a">● live • lokal</span></div>
+      <div id="preview" class="empty">
+        <div style="font-size:48px;margin-bottom:16px">🕯️ 🌸</div>
+        <h3 style="font-family:'Crimson Pro';font-size:24px;color:#fdf6e3;margin-bottom:12px">Altar masih kosong</h3>
+        <p>Isi form di kiri dan tekan <b style="color:#fdf6e3">Nyalakan Kenangan</b> untuk melihat ofrenda-mu menyala di sini.</p>
+      </div>
+      <div class="badge">🔒 100% Lokal & Privat — Tidak ada data ke server</div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+let fotoData = null;
+
+document.getElementById('foto').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  const errEl = document.getElementById('err-foto');
+  errEl.classList.remove('show');
+  e.target.classList.remove('invalid');
+  
+  if(!file) { fotoData = null; return; }
+  
+  if(!['image/jpeg','image/png','image/jpg','image/webp'].includes(file.type)){
+    errEl.textContent = '❌ Format foto harus JPG, PNG, atau WebP';
+    errEl.classList.add('show');
+    e.target.classList.add('invalid');
+    e.target.value = '';
+    fotoData = null;
+    return;
+  }
+  if(file.size > 5 * 1024 * 1024){
+    errEl.textContent = '❌ Ukuran foto maksimal 5MB';
+    errEl.classList.add('show');
+    e.target.classList.add('invalid');
+    e.target.value = '';
+    fotoData = null;
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(ev){ fotoData = ev.target.result; };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('kenangan').addEventListener('input', function(){
+  document.getElementById('char-count').textContent = this.value.length;
+  if(this.value.length >= 10){
+    this.classList.remove('invalid');
+    document.getElementById('err-kenangan').classList.remove('show');
+  }
+});
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 4000);
+}
+
+function validateForm(){
+  let valid = true;
+  let firstError = null;
+
+  const nama = document.getElementById('nama').value.trim();
+  const hubungan = document.getElementById('hubungan').value;
+  const kenangan = document.getElementById('kenangan').value.trim();
+  const namaEl = document.getElementById('nama');
+  const hubEl = document.getElementById('hubungan');
+  const kenEl = document.getElementById('kenangan');
+
+  // Reset
+  document.querySelectorAll('.error-msg').forEach(el=>el.classList.remove('show'));
+  document.querySelectorAll('.invalid').forEach(el=>el.classList.remove('invalid'));
+
+  // Nama validation
+  if(!nama){
+    document.getElementById('err-nama').textContent = '❌ Nama almarhum wajib diisi';
+    document.getElementById('err-nama').classList.add('show');
+    namaEl.classList.add('invalid');
+    valid = false;
+    if(!firstError) firstError = namaEl;
+  } else if(nama.length < 3){
+    document.getElementById('err-nama').textContent = '❌ Nama minimal 3 karakter (contoh: Nenek Lia, Kakek Anwar)';
+    document.getElementById('err-nama').classList.add('show');
+    namaEl.classList.add('invalid');
+    valid = false;
+    if(!firstError) firstError = namaEl;
+  }
+
+  // Hubungan validation
+  if(!hubungan){
+    document.getElementById('err-hubungan').textContent = '❌ Pilih hubungan terlebih dahulu';
+    document.getElementById('err-hubungan').classList.add('show');
+    hubEl.classList.add('invalid');
+    valid = false;
+    if(!firstError) firstError = hubEl;
+  }
+
+  // Cross validation: Nama contains Kakek but hubungan Nenek/Ibu etc
+  if(nama && hubungan){
+    const lowerNama = nama.toLowerCase();
+    const isKakek = lowerNama.includes('kakek');
+    const isNenek = lowerNama.includes('nenek');
+    const isIbu = lowerNama.includes('ibu') && !isNenek;
+    const isAyah = lowerNama.includes('ayah') || lowerNama.includes('bapak') || lowerNama.includes('pak');
+
+    if(isKakek && ['Nenek','Ibu'].includes(hubungan)){
+      document.getElementById('err-hubungan').textContent = `⚠️ Nama "${nama}" mengandung "Kakek" tapi hubungan yang dipilih "${hubungan}" tidak sesuai. Pilih Kakek atau Lainnya.`;
+      document.getElementById('err-hubungan').classList.add('show');
+      hubEl.classList.add('invalid');
+      valid = false;
+      if(!firstError) firstError = hubEl;
+    }
+    if(isNenek && ['Kakek','Ayah'].includes(hubungan)){
+      document.getElementById('err-hubungan').textContent = `⚠️ Nama "${nama}" mengandung "Nenek" tapi hubungan yang dipilih "${hubungan}" tidak sesuai. Pilih Nenek atau Lainnya.`;
+      document.getElementById('err-hubungan').classList.add('show');
+      hubEl.classList.add('invalid');
+      valid = false;
+      if(!firstError) firstError = hubEl;
+    }
+    if(isIbu && ['Kakek','Ayah'].includes(hubungan)){
+      document.getElementById('err-hubungan').textContent = `⚠️ Nama mengandung "Ibu" tapi hubungan "${hubungan}" terdeteksi laki-laki`;
+      document.getElementById('err-hubungan').classList.add('show');
+      hubEl.classList.add('invalid');
+      valid = false;
+      if(!firstError) firstError = hubEl;
+    }
+    if(isAyah && ['Nenek','Ibu'].includes(hubungan)){
+      document.getElementById('err-hubungan').textContent = `⚠️ Nama mengandung "Ayah/Bapak" tapi hubungan "${hubungan}" terdeteksi perempuan`;
+      document.getElementById('err-hubungan').classList.add('show');
+      hubEl.classList.add('invalid');
+      valid = false;
+      if(!firstError) firstError = hubEl;
+    }
+  }
+
+  // Kenangan validation
+  if(!kenangan){
+    document.getElementById('err-kenangan').textContent = '❌ Ceritakan satu kenangan, ini yang akan jadi isi ofrenda';
+    document.getElementById('err-kenangan').classList.add('show');
+    kenEl.classList.add('invalid');
+    valid = false;
+    if(!firstError) firstError = kenEl;
+  } else if(kenangan.length < 10){
+    document.getElementById('err-kenangan').textContent = `❌ Kenangan terlalu pendek (${kenangan.length}/10 karakter minimal). Ceritakan sedikit lebih detail.`;
+    document.getElementById('err-kenangan').classList.add('show');
+    kenEl.classList.add('invalid');
+    valid = false;
+    if(!firstError) firstError = kenEl;
+  } else if(kenangan.length > 200){
+    document.getElementById('err-kenangan').textContent = '❌ Kenangan maksimal 200 karakter biar tetap khidmat';
+    document.getElementById('err-kenangan').classList.add('show');
+    kenEl.classList.add('invalid');
+    valid = false;
+    if(!firstError) firstError = kenEl;
+  }
+
+  if(!valid && firstError){
+    firstError.focus();
+    showToast('⚠️ Perbaiki field yang merah dulu ya');
+  }
+
+  return valid;
+}
+
+function nyalakanKenangan(){
+  if(!validateForm()) return;
+
+  const data = {
+    nama: document.getElementById('nama').value.trim(),
+    hubungan: document.getElementById('hubungan').value,
+    makanan: document.getElementById('makanan').value.trim(),
+    lagu: document.getElementById('lagu').value.trim(),
+    kenangan: document.getElementById('kenangan').value.trim(),
+    foto: fotoData
+  };
+
+  const remembrance = `Di ofrenda kecil ini, kusiapkan tempat untukmu: hangat, terang, tidak megah tapi penuh cinta.
+
+Untuk ${data.nama}, ${data.hubungan}ku.
+
+Aku masih ingat ${data.kenangan.toLowerCase()}
+
+${data.makanan ? `Meja ini ada ${data.makanan}.` : 'Meja ini kusiapkan dengan penuh cinta.'} ${data.lagu ? `Di sudut, lagu ${data.lagu} pelan-pelan mengalun, seperti dulu saat kau masih di sini.` : 'Hening yang hangat menyelimuti altar ini.'}
+
+Terima kasih untuk semua hangatnya. Tak pernah padam.`;
+
+  const html = `
+    ${data.foto ? `<img src="${data.foto}" class="ofrenda-photo">` : '<div style="font-size:64px;text-align:center;margin-bottom:20px">🕯️</div>'}
+    <div class="ofrenda-name">${data.nama}</div>
+    <div class="ofrenda-meta">${data.hubungan} • Selalu di hati</div>
+    <div class="tags">
+      ${data.makanan ? `<span class="tag">🍛 ${data.makanan}</span>` : ''}
+      ${data.lagu ? `<span class="tag">🎵 ${data.lagu}</span>` : ''}
+    </div>
+    <div class="ofrenda-text">${remembrance}</div>
+  `;
+  document.getElementById('preview').innerHTML = html;
+  document.getElementById('preview').className = '';
+  localStorage.setItem('ofrenda-'+Date.now(), JSON.stringify({...data, remembrance}));
+  
+  // Success feedback
+  const btn = document.getElementById('btn-nyala');
+  const orig = btn.textContent;
+  btn.textContent = '✅ Ofrenda Menyala!';
+  btn.style.background = '#2e7d32';
+  setTimeout(()=>{ btn.textContent = orig; btn.style.background = ''; }, 2000);
+}
+</script>
+</body>
+</html>
