@@ -1,168 +1,378 @@
 # Ofrenda Digital - Ghost in the Machine 🕯️🌼
 
-> **Hacktoberfest 2026 - Week 4 DEV Challenge: Ghost in the Machine**
+> **Hacktoberfest 2026 · Week 4 DEV Challenge — Ghost in the Machine**
+>
 > Build something spooky, or something that honors the past in the spirit of Día de los Muertos, with open-weight models or open-source AI.
 
-[[Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2026-%23ff8c00?style=for-the-badge)](https://hacktoberfest.com)
-[[DEV Challenge](https://img.shields.io/badge/DEV%20Challenge-%23hf26challenge-black?style=for-the-badge)](https://dev.to/challenges/hacktoberfest-week4-2026-10-26)
-[[Open Weight](https://img.shields.io/badge/Model-Gemma%202%202B-blue?style=flat)](https://ai.google.dev/gemma)
-[[Local First](https://img.shields.io/badge/Privacy-100%25%20Local-green?style=flat)](https://ollama.com)
+[![Hacktoberfest 2026](https://img.shields.io/badge/Hacktoberfest-2026-%23ff8c00?style=for-the-badge)](https://hacktoberfest.com)
+[![DEV Challenge](https://img.shields.io/badge/DEV%20Challenge-%23hf26challenge-black?style=for-the-badge)](https://dev.to/challenges/hacktoberfest-week4-2026-10-26)
+[![Gemma 2 2B](https://img.shields.io/badge/Model-Gemma%202%202B-blue?style=flat)](https://ai.google.dev/gemma)
+[![Local First](https://img.shields.io/badge/Privacy-100%25%20Local-green?style=flat)](https://ollama.com)
 
-**Live Demo:** https://akmal2045.github.io/ofrenda-digital/ | **DEV Post:** *(isi setelah publish di dev.to)* | **Repo:** https://github.com/akmal2045/ofrenda-digital
+**Live Demo:** https://akmal2045.github.io/ofrenda-digital/  
+**Repository:** https://github.com/akmal2045/ofrenda-digital  
+**DEV Post:** *Coming soon*
+
+---
+
+## 🕯️ About the Project
 
 ### Bukan horor. Ini altar kecil di laptopmu.
 
-Ofrenda Digital adalah altar digital untuk mengenang Nenek Lia, Kakek, Ibu, Ayah, dan sahabat yang sudah berpulang. Offline, privat, bisa dibuka di makam tanpa sinyal.
+**Ofrenda Digital** adalah altar digital untuk mengenang orang-orang terkasih yang telah berpulang — Nenek Lia, Kakek, Ibu, Ayah, sahabat, atau siapa pun yang ingin tetap dikenang.
 
-Inspired by Día de los Muertos ofrenda tradition, but built with Indonesian context — for families who want to keep stories private and alive.
+Terinspirasi dari tradisi **Día de los Muertos**, proyek ini membawa konsep *ofrenda* ke dalam konteks Indonesia dengan pendekatan **private, local-first, dan offline-capable**.
 
----
+Tidak perlu akun. Tidak perlu mengunggah foto keluarga ke server. Tidak perlu internet untuk membuka altar.
 
-### ✨ Demo
-
-*Isi form di kiri, lihat altar menyala di kanan — dengan validasi lengkap*
-
-**Fitur:**
-- ✅ Upload foto almarhum (preview lokal, tidak pernah di-upload ke server, max 5MB, JPG/PNG/WebP)
-- ✅ Validasi wajib isi: Nama (min 3 karakter), Hubungan, Kenangan (min 10 karakter)
-- ✅ Validasi tidak sesuai: Nama `Kakek Anwar` tidak bisa dipasangkan dengan Hubungan `Nenek`
-- ✅ Input: Nama, Hubungan, Makanan Favorit, Lagu Favorit, Satu Kenangan
-- ✅ Generate teks kenangan dengan AI lokal (mock + siap pakai Ollama)
-- ✅ Visual ofrenda dengan lilin dan bunga marigold
-- ✅ 100% disimpan di localStorage browser, offline-first
+> **Kenangan tetap milik keluarga.**
 
 ---
 
-### 👻 Interpretasi Tema: Ghost in the Machine
+## ✨ Features
 
-Halloween dan Día de los Muertos adalah momen dimana batas antara masa lalu dan sekarang menipis. Aku memilih sisi yang menghangatkan — bukan menakutkan.
+### 🖼️ Personal Memories
+- Upload foto orang yang dikenang
+- Foto hanya diproses dan disimpan secara lokal di browser
+- Mendukung JPG, PNG, dan WebP
+- Ukuran foto maksimal 5 MB
+- Masukkan nama, hubungan, makanan favorit, lagu favorit, dan kenangan
 
-Ofrenda biasanya fisik: foto, marigold, lilin, makanan favorit. Ofrenda Digital membuatnya bisa dibawa kemana-mana, bahkan ke makam yang tidak ada sinyal.
+### 🕯️ Digital Ofrenda
+- Visual altar dengan lilin dan bunga marigold
+- Menampilkan foto dan informasi kenangan secara personal
+- Dirancang agar terasa hangat dan sederhana, bukan seperti aplikasi memorial yang formal
 
-Ghost-nya adalah kenangan. Machine-nya adalah laptop tua yang tetap bisa menjalankan AI tanpa internet.
+### 🤖 Local AI
+- Generate teks kenangan menggunakan AI lokal
+- **Gemma 2 2B** sebagai open-weight model
+- **Ollama** digunakan untuk menjalankan model secara lokal
+- Tidak membutuhkan API key atau layanan AI cloud
 
----
+### 🔒 Privacy First
+- Data disimpan menggunakan `localStorage`
+- Foto tidak diunggah ke server
+- Tidak membutuhkan login
+- Dapat digunakan secara lokal tanpa backend
 
-### 💡 Why Open Innovation Matters
-
-Ini bagian paling penting untuk juri DEV.
-
-**1. Privasi Keluarga Tetap di Rumah**
-Foto Nenek Lia dan cerita keluarga tidak pernah keluar dari laptop. Dengan model closed-source API, semua data harus dikirim ke server orang lain. Dengan Gemma 2B via Ollama, inference jalan 100% lokal.
-
-**2. Jalan Tanpa Internet**
-Di banyak makam di Indonesia, sinyal hilang. Layanan AI closed butuh internet. Ofrenda Digital jalan dengan `ollama serve` offline. Bisa dibuka saat nyekar, bahkan saat lampu mati dengan baterai laptop.
-
-**3. Tidak Terkunci, Bisa Diwariskan**
-Layanan startup bisa tutup besok. Model open-weight bisa di-download dan disimpan selamanya. Ofrenda untuk Nenek Lia hari ini bisa dibuka lagi 20 tahun lagi oleh cucuku. Ini digital heirloom, bukan subscription.
-
-**4. Biaya Nol untuk Kenangan**
-Tidak ada token cost. Sekali download Gemma 2B (~1.6GB), bisa generate ribuan kenangan gratis.
-
-> Open innovation worked better than closed because it let me build something intimate that respects privacy, works offline, and lasts longer than any company.
-
----
-
-### 🛠️ Tech Stack
-
-**Open-Source AI Core (Siap Integrasi):**
-- **Gemma 2 2B** by Google — Open-weight model, 2B params, optimized for local
-- **Ollama** — Run inference locally di `http://localhost:11434`, no API key
-
-**Frontend (Saat Ini - No Build):**
-- Vanilla HTML + CSS + JavaScript (single `index.html`, tanpa `npm`)
-- FileReader API untuk preview foto lokal
-- localStorage untuk persistence
-- Validasi form client-side (required, min length, cross-field validation)
-
-> Catatan juri: Versi saat ini pakai template generator agar bisa langsung demo di GitHub Pages tanpa backend. Kode integrasi Ollama asli sudah ada di dalam file dan siap di-uncomment.
-
-**Partner Tech untuk Prize Categories:**
-- **Best Use of Gemma** — Core model
-- **Best Use of a .tech Domain** — Bisa diklaim di hacktoberfest.com/my/promos
+### ✅ Input Validation
+- Field wajib tidak boleh kosong
+- Nama minimal 3 karakter
+- Kenangan minimal 10 karakter dan maksimal 200 karakter
+- Validasi hubungan dengan nama
+- Validasi tipe dan ukuran file foto
+- Error ditampilkan langsung pada form dan melalui toast notification
 
 ---
 
-### 🚀 Cara Menjalankan Lokal
+## 👻 Ghost in the Machine
 
-#### Opsi 1: Paling Cepat (Tanpa Install)
+> **The ghost is the memory.  
+> The machine is the laptop.**
+
+Halloween dan Día de los Muertos sama-sama berbicara tentang hubungan manusia dengan masa lalu — tetapi Ofrenda Digital memilih sisi yang hangat daripada menakutkan.
+
+Ofrenda tradisional biasanya berisi:
+
+- 📷 Foto orang yang telah berpulang
+- 🌼 Bunga marigold
+- 🕯️ Lilin
+- 🍲 Makanan favorit
+- 💭 Kenangan dan cerita
+
+Ofrenda Digital membawa elemen tersebut ke laptop.
+
+Dengan begitu, sebuah altar tidak harus selalu berada di rumah. Ia dapat dibawa ke makam, dibuka kembali bertahun-tahun kemudian, dan tetap menyimpan cerita keluarga secara lokal.
+
+---
+
+# 💡 Why Open Innovation Matters
+
+Penggunaan open-weight AI bukan sekadar pilihan teknologi. Untuk proyek seperti ini, **local AI memiliki nilai langsung terhadap privasi, aksesibilitas, dan keberlanjutan kenangan.**
+
+### 1. 🔒 Private Family Memories
+
+Foto dan cerita keluarga adalah data yang sangat personal.
+
+Dengan AI berbasis cloud, data harus dikirim ke server pihak ketiga. Dengan **Gemma 2 2B + Ollama**, inference dapat dilakukan secara lokal.
+
+> **Your family's memories stay on your machine.**
+
+### 2. 📶 Works Without Internet
+
+Banyak lokasi pemakaman di Indonesia memiliki koneksi internet yang buruk atau bahkan tidak memiliki sinyal.
+
+Ofrenda Digital dirancang dengan pendekatan **local-first**, sehingga altar tetap dapat dibuka tanpa koneksi internet.
+
+AI lokal juga dapat dijalankan menggunakan Ollama setelah model tersedia di perangkat.
+
+### 3. 🧬 A Digital Heirloom
+
+Layanan online dapat berubah, berhenti beroperasi, atau membutuhkan subscription.
+
+File lokal dan open-weight model memberikan kontrol yang lebih besar kepada pengguna.
+
+Sebuah altar yang dibuat hari ini dapat disimpan, dipindahkan, dan dibuka kembali bertahun-tahun kemudian.
+
+> **A digital heirloom, not a subscription.**
+
+### 4. 💰 No Per-Request AI Cost
+
+Tidak ada biaya token untuk inference lokal.
+
+Setelah model di-download, pengguna dapat menjalankan generation secara lokal tanpa membayar API request untuk setiap kenangan.
+
+---
+
+## 🛠️ Tech Stack
+
+### 🤖 AI
+
+| Technology | Purpose |
+|---|---|
+| **Gemma 2 2B** | Open-weight language model |
+| **Ollama** | Local AI inference |
+
+### 🌐 Frontend
+
+| Technology | Purpose |
+|---|---|
+| **HTML** | Application structure |
+| **CSS** | Styling and visual design |
+| **Vanilla JavaScript** | Application logic |
+| **FileReader API** | Local image preview |
+| **localStorage** | Local persistence |
+
+### 🚀 Deployment
+
+- GitHub Pages
+- No build process
+- No Node.js required for the basic demo
+- No backend required
+
+---
+
+## 🧠 AI Architecture
+
+The application is designed to support local inference through Ollama:
+
+```text
+User Input
+    │
+    ├── Name
+    ├── Relationship
+    ├── Favorite Food
+    ├── Favorite Song
+    └── Memory
+         │
+         ▼
+   Local Browser
+         │
+         ▼
+      Ollama
+         │
+         ▼
+    Gemma 2 2B
+         │
+         ▼
+Generated Remembrance
+         │
+         ▼
+    Digital Ofrenda
+```
+
+The current GitHub Pages demo uses a **local template/mock generation** so that the project can be demonstrated immediately without requiring an Ollama installation.
+
+The actual Ollama integration is already prepared in `index.html` and can be enabled when running the project locally.
+
+---
+
+# 🚀 Getting Started
+
+## Option 1 — Quick Demo
+
+No installation is required.
+
 ```bash
-# Cukup double-click index.html atau:
 git clone https://github.com/akmal2045/ofrenda-digital.git
 cd ofrenda-digital
-# buka index.html di browser
 ```
 
-#### Opsi 2: Dengan Ollama + Gemma (AI Beneran)
+Then open:
 
-**1. Install Ollama**
-Download di https://ollama.com
+```text
+index.html
+```
 
-**2. Pull Gemma 2B**
+directly in your browser.
+
+You can also try the deployed version:
+
+**https://akmal2045.github.io/ofrenda-digital/**
+
+---
+
+## Option 2 — Local AI with Ollama
+
+For actual local AI generation, install Ollama first.
+
+### 1. Install Ollama
+
+Download Ollama from:
+
+**https://ollama.com**
+
+### 2. Download Gemma 2 2B
+
 ```bash
 ollama pull gemma2:2b
-ollama serve
-# Model jalan di http://localhost:11434
 ```
 
-**3. Aktifkan Real Model di index.html**
-Cari fungsi `nyalakanKenangan()` dan ganti bagian `const remembrance = ...` dengan:
+Then start the Ollama server:
+
+```bash
+ollama serve
+```
+
+The local API will be available at:
+
+```text
+http://localhost:11434
+```
+
+### 3. Enable the Local AI Integration
+
+Inside `index.html`, locate:
 
 ```javascript
-const response = await fetch('http://localhost:11434/api/generate', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    model: 'gemma2:2b',
-    prompt: `Kamu adalah penulis kenangan hangat. Tulis teks ofrenda untuk:
-    Nama: ${data.nama}
-    Hubungan: ${data.hubungan}
-    Makanan favorit: ${data.makanan}
-    Lagu favorit: ${data.lagu}
-    Kenangan: ${data.kenangan}
-    Tulis dalam Bahasa Indonesia yang hangat dan puitis, 3 paragraf pendek.`,
-    stream: false
-  })
-});
+function nyalakanKenangan()
+```
+
+Replace the mock `remembrance` generation with:
+
+```javascript
+const response = await fetch(
+  'http://localhost:11434/api/generate',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: 'gemma2:2b',
+      prompt: `Kamu adalah penulis kenangan yang hangat dan puitis.
+
+Nama: ${data.nama}
+Hubungan: ${data.hubungan}
+Makanan favorit: ${data.makanan}
+Lagu favorit: ${data.lagu}
+Kenangan: ${data.kenangan}
+
+Tulis teks ofrenda dalam Bahasa Indonesia.
+Gunakan 3 paragraf pendek dengan nada hangat,
+personal, dan penuh penghormatan.`,
+      stream: false
+    })
+  }
+);
+
 const result = await response.json();
 const remembrance = result.response;
 ```
 
 ---
 
-### ✅ Validasi yang Sudah Ada
+# ✅ Validation
 
-Projek ini sudah divalidasi sesuai feedback:
-- [x] Field kosong dicegah (Nama, Hubungan, Kenangan wajib)
-- [x] Format tidak sesuai dicegah (Nama min 3, Kenangan min 10 max 200)
-- [x] Cross-validation: Kakek vs Nenek mismatch
-- [x] Foto: tipe JPG/PNG/WebP dan max 5MB
-- [x] Pesan error merah + toast + auto-focus ke field pertama yang salah
+The application includes client-side validation for the main input fields.
+
+| Validation | Status |
+|---|---|
+| Required fields | ✅ |
+| Name minimum length | ✅ |
+| Memory minimum length | ✅ |
+| Memory maximum length | ✅ |
+| Relationship consistency | ✅ |
+| JPG / PNG / WebP validation | ✅ |
+| Maximum file size: 5 MB | ✅ |
+| Inline error messages | ✅ |
+| Toast notification | ✅ |
+| Auto-focus on invalid field | ✅ |
+
+### Example
+
+The application prevents inconsistent relationships such as:
+
+```text
+Name: Kakek Anwar
+Relationship: Nenek
+```
+
+and asks the user to correct the input.
 
 ---
 
-### 📖 Submission Checklist (DEV Challenge)
+# 📂 Project Structure
 
-- [x] Built with open-weight model (Gemma 2B - ready)
-- [x] Runs locally / offline capable
-- [x] Theme: Ghost in the Machine + honors past (Nenek Lia)
-- [x] Write-up explains why open > closed
-- [x] Demo link: https://akmal2045.github.io/ofrenda-digital/
-- [x] GitHub link: https://github.com/akmal2045/ofrenda-digital
-- [x] Tags: #devchallenge #hf26challenge
-- [x] Prize Categories: Best Use of Gemma
+The project intentionally keeps its architecture simple so it can run without a build system.
 
----
+```text
+ofrenda-digital/
+│
+├── index.html
+└── README.md
+```
 
-### 📜 License
-
-MIT - Bebas dipakai untuk mengenang siapa saja.
+Everything required for the basic application is contained in `index.html`.
 
 ---
 
-### 🙏 Untuk Nenek Lia
+# 🏆 Hacktoberfest Submission
 
-> Tak pernah padam. Bukan horor. Ini altar kecil di laptopku — untuk Nenek Lia yang suka rendang, klepon, kopi tubruk, dan lagu Bengawan Solo.
+### DEV Challenge — Ghost in the Machine
 
-Dibuat dengan cinta untuk Hacktoberfest 2026 Week 4 - Ghost in the Machine.  
-Submission closes: Sun 1 Nov, 1:59 PM WIB (Asia/Jakarta)
+- [x] Honors the past
+- [x] Inspired by Día de los Muertos
+- [x] Uses open-weight AI
+- [x] Gemma 2 2B integration prepared
+- [x] Local-first architecture
+- [x] Offline-capable
+- [x] Privacy-focused
+- [x] Public GitHub repository
+- [x] Live demo available
+- [x] Write-up explains open vs. closed AI
+- [x] `#devchallenge`
+- [x] `#hf26challenge`
+
+### Prize Category
+
+**Best Use of Gemma**
+
+Gemma 2 2B is used as the local language model for generating personalized remembrance text.
+
+---
+
+# 📜 License
+
+This project is licensed under the **MIT License**.
+
+You are free to use, modify, and build upon it.
+
+---
+
+# 🙏 For Nenek Lia
+
+> *Tak pernah padam.*
+
+Bukan horor.
+
+Ini altar kecil di laptopku — untuk **Nenek Lia**, yang suka rendang, klepon, kopi tubruk, dan lagu *Bengawan Solo*.
+
+Dibuat dengan cinta untuk **Hacktoberfest 2026 — Week 4: Ghost in the Machine**.
+
+---
+
+**Submission deadline:** Sunday, November 1, 2026 · 1:59 PM WIB (Asia/Jakarta)
+
+**Live Demo:** https://akmal2045.github.io/ofrenda-digital/  
+**Repository:** https://github.com/akmal2045/ofrenda-digital
