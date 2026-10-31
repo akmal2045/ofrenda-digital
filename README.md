@@ -11,7 +11,7 @@
 
 **Live Demo:** https://akmal2045.github.io/ofrenda-digital/  
 **Repository:** https://github.com/akmal2045/ofrenda-digital  
-**DEV Post:** *Coming soon*
+**DEV Post:** https://dev.to/akmal2045/ofrenda-digital-tak-pernah-padam-a-ghost-in-the-machine-for-nenek-lia-4d19
 
 ---
 
